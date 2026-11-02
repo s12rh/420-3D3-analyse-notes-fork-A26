@@ -13,38 +13,13 @@ class Programme:
         self.cours.append(cours)
 
     def moyenne(self) -> float:
-        """Calcule la moyenne du programme.
-
-        ⚠️  Pour calculer la moyenne, Programme doit connaître
-        la structure interne de Cours, Session et GroupeCours.
-        Si on ajoute un niveau (ex. Département), il faut modifier
-        cette méthode.
-        """
-        total = 0.0
-        count = 0
-        for cours in self.cours:
-            for session in cours.sessions:          # ← connaît Session
-                for groupe in session.groupes:      # ← connaît GroupeCours
-                    for etudiant in groupe.etudiants:  # ← connaît Etudiant
-                        total += etudiant.moyenne()
-                        count += 1
-        if count == 0:
+        if not self.cours:
             return 0.0
-        return round(total / count, 1)
+        return round(sum(c.moyenne() for c in self.cours) / len(self.cours), 1)
 
     def nb_etudiants(self) -> int:
-        """Compte les étudiants du programme.
-
-        ⚠️  Même problème — boucles imbriquées qui connaissent
-        tous les niveaux de la hiérarchie.
-        """
-        count = 0
-        for cours in self.cours:
-            for session in cours.sessions:
-                for groupe in session.groupes:
-                    count += len(groupe.etudiants)
-        return count
-
+        return sum(c.nb_etudiants() for c in self.cours)
+    
     def to_dict(self) -> dict:
         """Sérialise le programme pour le frontend.
 

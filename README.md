@@ -28,7 +28,7 @@ Le projet peut s'exécuter de deux façons. Dans `app.py`, modifiez la variable 
 ### Mode terminal (recommandé pour débuter)
 
 ```python
-MODE = "terminal"
+MODE = "web"
 ```
 
 ```bash
@@ -50,7 +50,7 @@ Techniques de l'informatique (79.3%)
 ### Mode web
 
 ```python
-MODE = "web"
+MODE = "terminal"
 ```
 
 ```bash
